@@ -1,0 +1,4 @@
+module.exports = {
+  API_URL: API_URL,
+  HASURA_ADMIN_SECRET: SECRET_KEY
+}

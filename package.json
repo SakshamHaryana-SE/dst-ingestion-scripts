@@ -1,0 +1,24 @@
+{
+  "name": "dst-ingestion-scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HinalTekdi/DST-Ingestion-Scripts.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HinalTekdi/DST-Ingestion-Scripts/issues"
+  },
+  "homepage": "https://github.com/HinalTekdi/DST-Ingestion-Scripts#readme",
+  "dependencies": {
+    "axios": "0.26.1",
+    "exceljs": "4.3.0",
+    "moment": "2.29.1"
+  }
+}
