@@ -55,6 +55,20 @@ module.exports = {
     }).then((response) => {
       return response
     })
+  },
+
+  addIndustrySchedule: async function (data) {
+    return axios({
+      method: 'post',
+      url: `${API_URL}/addIndustrySchedule`,
+      data: JSON.stringify(data),
+      headers: {
+        'x-hasura-admin-secret': HASURA_ADMIN_SECRET,
+        'Content-Type': 'application/json',
+      }
+    }).then((response) => {
+      return response
+    })
   }
 }
 

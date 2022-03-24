@@ -1,14 +1,22 @@
 const Excel = require('exceljs');
-const { addIti, addTrainee, addIndustry, getIndustryByName } = require('../utils');
+const {
+  addIti,
+  addTrainee,
+  addIndustry,
+  getIndustryByName,
+  addIndustrySchedule
+} = require('../utils');
 const moment = require('moment');
 const filename = 'Sample DST data.xlsx';
 let trainees = [];
-let industries = []
+let industries = [];
+let industrySchedule = [];
 async function traineeStory() {
   const workbook = new Excel.Workbook();
   workbook.xlsx.readFile(filename)
     .then(async function () {
 
+      // Industry
       // Get data for industry from xls
       const worksheetOfIndustry = workbook.getWorksheet(3);
       worksheetOfIndustry.eachRow(async function (row, rowNumber) {
@@ -36,6 +44,55 @@ async function traineeStory() {
       await Promise.all(industryPromiseAll);
       console.log(`Industry added: ${moment()}`);
 
+      // Industry schedule
+      // Get data for industry from xls
+      const worksheetOfIndustrySchedule = workbook.getWorksheet(3);
+      let columnData = [];
+
+      worksheetOfIndustrySchedule.eachRow(async function (row, rowNumber) {
+        if (rowNumber === 1) {
+          columnData = row.values;
+        }
+        if (rowNumber >= 2) {
+          // Get industry by name
+          const industryRes = await getIndustryByName({name: row.values[5]})
+          const batch = row.values[7].split('-');
+
+          for (let column = 8; column < columnData.length; column++) {
+            if (row.values[column] === 'Sessions ends') {
+              break
+            }
+            // Prepare data of schedule
+            const finalDate = moment(columnData[column]).format('YYYY-MM-DD').split('-');
+            const scheduleData = {
+              batch_start: batch[0],
+              batch_end: `20${batch[1]}`,
+              industry_id: industryRes.data.industry[0].id,
+              month: finalDate[1],
+              year: `20${finalDate[2]}`,
+              is_industry: row.values[column] === 'Industry'
+            }
+           await industrySchedule.push(scheduleData);
+          }
+        }
+      });
+
+      // Add industry schedule
+      setTimeout(async () => {
+        const industrySchedulePromiseAll = await industrySchedule.map(async (schedule) => {
+          return new Promise(async (resolve) => {
+
+            // Add industry
+            await addIndustrySchedule(schedule);
+
+            resolve(true)
+          })
+        })
+        await Promise.all(industrySchedulePromiseAll);
+        console.log(`Industry schedule added: ${moment()}`);
+      }, 200);
+
+      // Trainee & ITI
       // Get data for trainee from xls
       const worksheet = workbook.getWorksheet(2);
       worksheet.eachRow(async function (row, rowNumber) {
