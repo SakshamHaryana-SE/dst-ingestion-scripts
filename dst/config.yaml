@@ -1,0 +1,6 @@
+version: 3
+endpoint: http://167.71.236.219:5001
+metadata_directory: metadata
+actions:
+  kind: synchronous
+  handler_webhook_baseurl: http://localhost:3000

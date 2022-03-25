@@ -1,0 +1,138 @@
+- name: allowed-queries
+  definition:
+    queries:
+    - name: getLatLongByTraineeId
+      query: |-
+        query getLatLongByTraineeId($id: Int! ) {
+          trainee(where: {id: {_eq: $id}}) {
+            itiByIti {
+              latitude
+              longitude
+            }
+          }
+        }
+    - name: getMyQuery
+      query: |-
+        query MyQuery($id: Int!) {
+          iti(where: {id: {_eq: $id}}) {
+            id
+            latitude
+            longitude
+          }
+        }
+    - name: AddIti
+      query: |-
+        mutation addIti ($latitude: Float!, $longitude: Float!, $name: String!,){
+          insert_iti(objects: {latitude: $latitude, longitude: $longitude, name: $name}) {
+            returning {
+              id
+            }
+          }
+        }
+    - name: addIndustry
+      query: |-
+        mutation addIndustry($latitude: Float, $longitude: Float, $name: String!) {
+          insert_industry(objects: {latitude: $latitude, longitude: $longitude, name: $name}) {
+            returning {
+              id
+            }
+          }
+        }
+    - name: getIndustryByName
+      query: |-
+        query getIndustryByName($name: String!) {
+          industry(where: {name: {_eq: $name}}) {
+            id
+            name
+            longitude
+            latitude
+          }
+        }
+    - name: addTraionee
+      query: "mutation addTrainee(\n  $iti: Int!, $DOB: date!,\n  $affiliationType:
+        String!,\n  $batch: String!,\n  $candidateName: String!,\n  $industry: Int!,\n
+        \ $registrationNumber: String!,\n  $tradeName: String!,\n  $father: String!,\n
+        \ $mother: String!,\n  $gender: String!,\n  $dateOfAdmission: date!\n) {\n
+        \ insert_trainee(objects: {\n    DOB: $DOB, affiliationType: $affiliationType,\n
+        \   batch: $batch, name: $candidateName, industry: $industry, \n    registrationNumber:
+        $registrationNumber,\n    tradeName: $tradeName, iti: $iti,\n    father: $father,\n
+        \   mother: $mother, gender: $gender, dateOfAdmission: $dateOfAdmission\n
+        \ }) {\n    returning {\n      id\n    }\n  }\n}"
+    - name: getTraineeByEnrlAndDob
+      query: |-
+        query getTraineeByEnrlAndDob($registrationNumber: String!, $dob: date) {
+          trainee(where: {registrationNumber: {_eq: $registrationNumber}, _and: {DOB: {_eq: $dob}}}) {
+            id
+            name
+            batch
+            affiliationType
+            DOB
+            registrationNumber
+            tradeName
+            iti: itiByIti {
+              latitude
+              longitude
+              name
+              id
+            }
+            industry
+          }
+        }
+    - name: Get Trainee
+      query: |-
+        query getTrainee($id: Int!) {
+          trainee(where: {id: {_eq: $id}}) {
+            name
+            batch
+            id
+            DOB
+            affiliationType
+            registrationNumber
+            tradeName
+            iti
+            industry
+            itiByIti {
+              id
+              name
+            }
+            industryByIndustry {
+              id
+              name
+              latitude
+              longitude
+            }
+          }
+        }
+    - name: addIndustrySchedule
+      query: |-
+        mutation addIndustrySchedule($batch_end: Int!, $batch_start: Int!, $industry_id: Int!, $is_industry: Boolean!, $month: Int!, $year:Int!) {
+          insert_schedule(objects: {batch_end: $batch_end, batch_start: $batch_start, industry_id: $industry_id, is_industry: $is_industry, month: $month, year: $year}) {
+            returning {
+              id
+            }
+          }
+        }
+    - name: getIndustryScheduleByMonthAndYear
+      query: |-
+        query getIndustryScheduleByMonthAndYear($month: Int!, $year: Int!, $industry_id: Int!) {
+          schedule(where: {month: {_eq: $month}, _and: {year: {_eq: $year}, _and: {industry_id: {_eq: $industry_id}}}}) {
+            id
+            is_industry
+          }
+        }
+    - name: addAttendance
+      query: |-
+        mutation addAttendance($date: date!, $industry_id: Int!, $is_present: Boolean!, $trainee_id: Int!) {
+          insert_attendance(objects: {date: $date, industry_id: $industry_id, is_present: $is_present, trainee_id: $trainee_id}) {
+            returning {
+              id
+            }
+          }
+        }
+    - name: getAttendanceByTraineeAndIndustryAndDate
+      query: |-
+        query getAttendanceByTraineeAndIndustryAndDate($date: date!, $industry_id: Int!, $trainee_id: Int!) {
+          attendance(where: {date: {_eq: $date}, _and: {industry_id: {_eq: $industry_id}, _and: {trainee_id: {_eq: $trainee_id}}}}) {
+            id
+          }
+        }

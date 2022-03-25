@@ -1,0 +1,7 @@
+table:
+  name: schedule
+  schema: public
+object_relationships:
+- name: industry
+  using:
+    foreign_key_constraint_on: industry_id
