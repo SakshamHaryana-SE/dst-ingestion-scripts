@@ -1,0 +1,108 @@
+- definition:
+    query:
+      collection_name: allowed-queries
+      query_name: addAttendance
+  url: addAttendance
+  methods:
+  - POST
+  name: addAttendance
+  comment: null
+- definition:
+    query:
+      collection_name: allowed-queries
+      query_name: addIndustry
+  url: addIndustry
+  methods:
+  - POST
+  name: addIndustry
+  comment: null
+- definition:
+    query:
+      collection_name: allowed-queries
+      query_name: addIndustrySchedule
+  url: addIndustrySchedule
+  methods:
+  - POST
+  name: addIndustrySchedule
+  comment: null
+- definition:
+    query:
+      collection_name: allowed-queries
+      query_name: AddIti
+  url: addIti
+  methods:
+  - POST
+  name: AddIti
+  comment: null
+- definition:
+    query:
+      collection_name: allowed-queries
+      query_name: addTraionee
+  url: addTrainee
+  methods:
+  - POST
+  name: addTraionee
+  comment: null
+- definition:
+    query:
+      collection_name: allowed-queries
+      query_name: getAttendanceByTraineeAndIndustryAndDate
+  url: getAttendanceByTraineeAndIndustryAndDate
+  methods:
+  - POST
+  name: getAttendanceByTraineeAndIndustryAndDate
+  comment: null
+- definition:
+    query:
+      collection_name: allowed-queries
+      query_name: getIndustryByName
+  url: getIndustryByName
+  methods:
+  - GET
+  name: getIndustryByName
+  comment: null
+- definition:
+    query:
+      collection_name: allowed-queries
+      query_name: getIndustryScheduleByMonthAndYear
+  url: getIndustryScheduleByMonthAndYear
+  methods:
+  - POST
+  name: getIndustryScheduleByMonthAndYear
+  comment: null
+- definition:
+    query:
+      collection_name: allowed-queries
+      query_name: getLatLongByTraineeId
+  url: getLatLongByTraineeId
+  methods:
+  - GET
+  name: getLatLongByTraineeId
+  comment: null
+- definition:
+    query:
+      collection_name: allowed-queries
+      query_name: getMyQuery
+  url: getMyQuery
+  methods:
+  - GET
+  name: getMyQuery
+  comment: null
+- definition:
+    query:
+      collection_name: allowed-queries
+      query_name: Get Trainee
+  url: getTrainee
+  methods:
+  - GET
+  name: Get Trainee
+  comment: null
+- definition:
+    query:
+      collection_name: allowed-queries
+      query_name: getTraineeByEnrlAndDob
+  url: getTraineeByEnrlAndDob
+  methods:
+  - POST
+  name: getTraineeByEnrlAndDob
+  comment: null

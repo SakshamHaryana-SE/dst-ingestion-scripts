@@ -1,0 +1,10 @@
+table:
+  name: attendance
+  schema: public
+object_relationships:
+- name: industry
+  using:
+    foreign_key_constraint_on: industry_id
+- name: trainee
+  using:
+    foreign_key_constraint_on: trainee_id
