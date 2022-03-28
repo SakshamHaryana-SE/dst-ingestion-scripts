@@ -49,15 +49,14 @@
           }
         }
     - name: addTraionee
-      query: "mutation addTrainee(\n  $iti: Int!, $DOB: date!,\n  $affiliationType:
-        String!,\n  $batch: String!,\n  $candidateName: String!,\n  $industry: Int!,\n
-        \ $registrationNumber: String!,\n  $tradeName: String!,\n  $father: String!,\n
-        \ $mother: String!,\n  $gender: String!,\n  $dateOfAdmission: date!\n) {\n
-        \ insert_trainee(objects: {\n    DOB: $DOB, affiliationType: $affiliationType,\n
-        \   batch: $batch, name: $candidateName, industry: $industry, \n    registrationNumber:
-        $registrationNumber,\n    tradeName: $tradeName, iti: $iti,\n    father: $father,\n
-        \   mother: $mother, gender: $gender, dateOfAdmission: $dateOfAdmission\n
-        \ }) {\n    returning {\n      id\n    }\n  }\n}"
+      query: |-
+        mutation addTrainee($iti: Int!, $DOB: date!,  $affiliationType: String!, $batch: String!, $candidateName: String!, $industry: Int!, $registrationNumber: String!, $tradeName: String!, $father: String!, $mother: String!, $gender: String!, $dateOfAdmission: date!) {
+          insert_trainee(objects: {DOB: $DOB, affiliationType: $affiliationType, batch: $batch, name: $candidateName, industry: $industry, registrationNumber: $registrationNumber, tradeName: $tradeName, iti: $iti, father: $father, mother: $mother, gender: $gender, dateOfAdmission: $dateOfAdmission}) {
+            returning {
+              id
+            }
+          }
+        }
     - name: getTraineeByEnrlAndDob
       query: |-
         query getTraineeByEnrlAndDob($registrationNumber: String!, $dob: date) {
